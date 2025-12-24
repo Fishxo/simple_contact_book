@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 20px;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    background: #fff;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-left: 35%;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.ddd {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* for elements like div/input */
+}
+
+
+input {
+    width: 30%;
+    height: 5%;
+    margin-left: 35%;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    margin-left: 35%;
+    background-color: #5c7cfa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #4c6ef5;
+}
+
+.contact-card {
+    background: #fff;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.contact-info {
+    margin-bottom: 10px;
+}
+.search-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.search-form button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: #5c7cfa;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #4c6ef5;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>a simple contact form here</h1>
+     <form action="/add" method="post">
+        <label for="name">name</label><br>
+        <input type="text" name="name" required><br>
+        <label for="phone">phone number</label><br>
+        <input type="text" pattern="\d*" inputmode="numeric" name="num" title="Only numbers allowed"required>
+
+        <label for="email">email</label><br>
+        <input type="email" name="email" required><br>
+        <button type="submit">add</button><br>
+     </form>
+
+<form action="/" method="GET" name="ddd">
+  <input type="text" name="q" placeholder="Search contacts">
+  <button type="submit">Search</button>
+</form>
+
+     <% contacts.forEach(contact => { %>
+  <div class="contact-card">
+    <div class="contact-info">
+      <strong>Name:</strong> <%= contact.name %><br>
+      <strong>Phone:</strong> <%= contact.num %><br>
+      <strong>Email:</strong> <%= contact.email %>
+    </div>
+    <div class="contact-forms">
+      <form action="/delete/<%= contact.id %>" method="POST">
+        <button>Delete</button>
+      </form>
+      <form action="/update/<%= contact.id %>" method="POST">
+        <input type="text" name="name" value="<%= contact.name %>" required>
+        <input type="text" name="num" pattern="\d*" inputmode="numeric" value="<%= contact.num %>" required>
+        <input type="email" name="email" value="<%= contact.email %>" required>
+        <button>Update</button>
+      </form>
+     
+    </div>
+  </div>
+<% }) %>
+
+ 
+
+</body>
+</html>
