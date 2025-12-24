@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+
 //middleware handler
 app.use(express.urlencoded({extended:true}))
 
@@ -7,6 +9,14 @@ let contacts = [];
 let id =1;
 
  app.set('view engine' , 'ejs');
+ app.set('views', path.join(__dirname, 'views'));
+
+// this comes after vercel deployemnt
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 // using a add button
 
@@ -54,6 +64,9 @@ app.post('/update/:id',(req,res) =>{
 app.get('/', (req,res) =>{
     res.render('contact',{contacts:contacts});
 })
+
+// export for Vercel
+module.exports = app;
 
 app.listen(3000,(req,res)=>{
     console.log('server is running ')
