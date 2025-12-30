@@ -134,11 +134,9 @@ button:hover {
       <form action="/delete/<%= contact.id %>" method="POST">
         <button>Delete</button>
       </form>
-      <form action="/update/<%= contact.id %>" method="POST">
-        <input type="text" name="name" value="<%= contact.name %>" required>
-        <input type="text" name="num" pattern="\d*" inputmode="numeric" value="<%= contact.num %>" required>
-        <input type="email" name="email" value="<%= contact.email %>" required>
-        <button>Update</button>
+      <form action="/edit/<%= contact.id %>" method="get">
+        
+        <button>edit</button>
       </form>
      
     </div>

@@ -47,19 +47,32 @@ app.post('/update/:id',(req,res) =>{
 
   // using a seartch button 
 
-  app.get('/', (req, res) => {
-  let results = contacts;
-  if(req.query.q) {
-    const q = req.query.q.toLowerCase();
-    results = contacts.filter(c =>
-      c.name.toLowerCase().includes(q) ||
-      c.num.includes(q) ||
-      c.email.toLowerCase().includes(q)
-    );
-  }
-  res.render('contact', { contacts: results });
-});
+      app.get('/', (req, res) => {
+      let results = contacts;
+      if(req.query.q) {
+        const q = req.query.q.toLowerCase();
+        results = contacts.filter(c =>
+          c.name.toLowerCase().includes(q) ||
+          c.num.includes(q) ||
+          c.email.toLowerCase().includes(q)
+        );
+        if(results.length === 0) {
+      return  res.send("<h4> contact not found <h4>")
+      }
+      }
+       res.render('contact', { contacts: results });
+      
+    });
 
+ app.get('/edit/:id/',(req,res)=>{
+  const id = Number(req.params.id)
+
+  const contact = contacts.find(t => t.id === id)
+  if(!contact){
+    return res.redirect('/')
+  }
+   res.render('update', {contact})
+ })
 
 app.get('/', (req,res) =>{
     res.render('contact',{contacts:contacts});
